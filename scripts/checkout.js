@@ -40,7 +40,7 @@ cart.forEach((cartItem) => {
                 <span class="update-quantity-link link-primary js-update-links quantity-link-style" data-product-id="${matchingProduct.id}">
                 Update
                 </span>
-                <input class="quantity-input style-on-update">
+                <input class="quantity-input style-on-updat js-quantity-count-${matchingProduct.id}" data-product-id="${matchingProduct.id}">
                 <span class="save-quantity-link link-primary style-on-update" data-product-id="${matchingProduct.id}">Save</span>
                 <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${matchingProduct.id}">
                 Delete
@@ -128,6 +128,9 @@ document.querySelectorAll('.save-quantity-link').forEach((saveButton) => {
     saveButton.addEventListener('click', () => {
         const productId = saveButton.dataset.productId
         document.querySelector(`.js-cart-item-container-${productId}`).classList.remove('is-editing-quantity')
+        const newQuant = document.querySelector(`.js-quantity-count-${productId}`).value
+        const newQuantInteger = parseInt(newQuant, 10);
+        console.log(newQuantInteger)
     })
 })
 
