@@ -1,4 +1,4 @@
-import { cart, removeFromCart, calculateCartQuantity } from "../data/cart.js";
+import { cart, removeFromCart, calculateCartQuantity, updateQuantity } from "../data/cart.js";
 import { products } from "../data/products.js";
 import { formatCurrency } from "./utils/money.js"
 
@@ -130,7 +130,7 @@ document.querySelectorAll('.save-quantity-link').forEach((saveButton) => {
         document.querySelector(`.js-cart-item-container-${productId}`).classList.remove('is-editing-quantity')
         const newQuant = document.querySelector(`.js-quantity-count-${productId}`).value
         const newQuantInteger = parseInt(newQuant, 10);
-        console.log(newQuantInteger)
+        updateQuantity(productId, newQuantInteger);
     })
 })
 
