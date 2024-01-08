@@ -126,17 +126,41 @@ document.querySelectorAll('.js-update-links').forEach((link) => {
 
 document.querySelectorAll('.save-quantity-link').forEach((saveButton) => {
     saveButton.addEventListener('click', () => {
-        const productId = saveButton.dataset.productId
-        document.querySelector(`.js-cart-item-container-${productId}`).classList.remove('is-editing-quantity')
-        const newQuant = document.querySelector(`.js-quantity-count-${productId}`).value
-        const newQuantInteger = parseInt(newQuant, 10);
-        updateQuantity(productId, newQuantInteger)
-        const quantityLabel = document.querySelector(
-            `.js-quantity-label-${productId}`
-          );
-        quantityLabel.innerHTML = newQuantInteger;
-        updateCartQuantity()
-    })
-})
+        const productId = saveButton.dataset.productId;
+        const container = document.querySelector(`.js-cart-item-container-${productId}`);
+        
+        // Remove the editing class
+        container.classList.remove('is-editing-quantity');
+        
+        // Get the new quantity value
+        const newQuant = document.querySelector(`.js-quantity-count-${productId}`).value;
+        
+        // Check if the new quantity is a valid number
+        if (newQuant >= 0 && newQuant < 1000) {
+            // Convert the new quantity to an integer
+            const newQuantInteger = parseInt(newQuant, 10);
+            
+            // Update the quantity in your data (e.g., cart)
+            updateQuantity(productId, newQuantInteger);
+            
+            // Update the displayed quantity label
+            const quantityLabel = document.querySelector(`.js-quantity-label-${productId}`);
+            quantityLabel.innerHTML = newQuantInteger;
+            
+            // Update the overall cart quantity
+            updateCartQuantity();
+        }
+        
+        document.querySelector(`.js-quantity-count-${productId}`).addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                // Trigger the click event on the save button when Enter is pressed
+                saveButton.click();
+            }
+        });
+    });
+
+    // Add keypress event listener
+});
+
 
 updateCartQuantity()
