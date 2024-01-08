@@ -150,7 +150,7 @@ document.querySelectorAll('.save-quantity-link').forEach((saveButton) => {
         // Update the displayed quantity label
         const quantityLabel = document.querySelector(`.js-quantity-label-${productId}`);
         quantityLabel.innerHTML = newQuantInteger;
-        document.querySelector(`.js-quantity-count-${productId}`).addEventListener('keypress', (event) => {
+        document.querySelector(`.js-quantity-count-${productId}`).addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
                 // Trigger the click event on the save button when Enter is pressed
                 saveButton.click();
@@ -161,3 +161,4 @@ document.querySelectorAll('.save-quantity-link').forEach((saveButton) => {
     });
 });
 
+updateCartQuantity();
